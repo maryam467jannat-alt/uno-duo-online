@@ -12,10 +12,95 @@ header{padding:18px 16px 8px;text-align:center}h1{margin:0;font-size:clamp(26px,
 main{max-width:760px;margin:auto;padding:12px;display:grid;gap:12px}.panel{background:#1b2739eF;border:1px solid #ffffff17;border-radius:18px;padding:14px;box-shadow:0 10px 30px #0002}
 .row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}input,button{font:inherit;border-radius:12px;padding:12px;border:1px solid #ffffff25}input{background:#0d1522;color:white;min-width:0;width:100%}button{background:#2e4059;color:white;font-weight:700;cursor:pointer}button.primary{background:var(--accent);color:#10251e;border:0}button:disabled{opacity:.4;cursor:not-allowed}.small{font-size:13px;color:var(--muted)}#status{font-weight:700;color:var(--accent);margin-bottom:8px}#message{color:#dce5f3;min-height:22px}.arena{display:grid;grid-template-columns:1fr 1fr;gap:10px}.player{padding:10px;border-radius:14px;background:#101827;text-align:center;border:1px solid #ffffff14}.player.active{border-color:var(--accent);box-shadow:0 0 0 1px #6ee7b733}.num{font-size:22px;font-weight:800}.table{display:flex;align-items:center;justify-content:center;gap:18px;min-height:150px}.pile{text-align:center}.pile label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.card{width:62px;height:92px;border:3px solid #fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;text-shadow:0 1px 2px #0008;box-shadow:0 5px 12px #0004;position:relative;transform:rotate(-3deg);flex-shrink:0}.card:before{content:"";position:absolute;inset:6px 10px;border:2px solid #ffffff99;border-radius:50%;transform:rotate(-25deg)}.card span{position:relative;z-index:1}.red{background:#e83c4b}.blue{background:#287ee8}.green{background:#1ca875}.yellow{background:#e9bb2f;color:#17202c;text-shadow:none}.wild{background:conic-gradient(#e83c4b 0 25%,#287ee8 0 50%,#1ca875 0 75%,#e9bb2f 0)}.back{background:linear-gradient(135deg,#c92b44,#542bd1)}.hand{display:flex;gap:8px;overflow-x:auto;padding:12px 3px 16px;min-height:122px;align-items:center}.hand .card{width:58px;height:86px;cursor:pointer;transition:transform .16s,margin .16s}.hand .card:active{transform:translateY(-9px) scale(1.04)}.hand .card:disabled{opacity:.5}.section-title{font-size:14px;color:var(--muted);margin:0 0 4px}.hidden{display:none!important}.footer{font-size:12px;color:var(--muted);text-align:center;padding:6px 0 18px}
 @media(min-width:600px){.card{width:74px;height:108px;font-size:24px}.hand .card{width:68px;height:100px}}
+
+/* UNO Duo visual upgrade */
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, #354f79 0%, transparent 55%),
+    linear-gradient(160deg, #111a2d, #090f1c);
+  background-attachment: fixed;
+}
+.panel {
+  background: linear-gradient(145deg, #24344cF5, #141e30F5);
+  border: 1px solid #ffffff22;
+  box-shadow: 0 12px 32px #0004, inset 0 1px #ffffff0a;
+}
+h1 {
+  text-shadow: 0 4px 22px #0006;
+}
+h1 span {
+  color: #fb7185;
+  text-shadow: 0 0 20px #fb718566;
+}
+button {
+  transition: transform .16s, filter .16s, box-shadow .16s;
+}
+button:not(:disabled):active {
+  transform: scale(.96);
+  filter: brightness(1.15);
+}
+button.primary {
+  background: linear-gradient(135deg, #6ee7b7, #34d399);
+  box-shadow: 0 5px 16px #34d39930;
+}
+.card {
+  border: 3px solid #fff;
+  border-radius: 13px 13px 17px 13px;
+  box-shadow: 0 7px 15px #0005, inset 0 0 0 2px #ffffff18;
+  transition: transform .2s, box-shadow .2s;
+}
+.hand .card:not(:disabled):hover {
+  transform: translateY(-10px) rotate(0deg) scale(1.06);
+  box-shadow: 0 12px 22px #0007;
+  z-index: 2;
+}
+.hand .card:focus-visible {
+  outline: 3px solid #6ee7b7;
+  outline-offset: 3px;
+}
+.player {
+  transition: border-color .2s, box-shadow .2s;
+}
+.player.active {
+  border-color: #6ee7b7;
+  box-shadow: 0 0 18px #6ee7b733, inset 0 0 16px #6ee7b70a;
+}
+.table {
+  border-radius: 18px;
+  background: #080f1b45;
+  margin-top: 12px;
+}
+#soundToggle {
+  margin: 8px auto 0;
+  display: block;
+  border-radius: 24px;
+  padding: 8px 16px;
+  background: #253751;
+  border-color: #ffffff25;
+}
+#status {
+  text-shadow: 0 0 14px #6ee7b744;
+}
+#message {
+  line-height: 1.5;
+}
+@keyframes cardAppear {
+  from { opacity: .4; transform: translateY(8px) scale(.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hand .card {
+  animation: cardAppear .2s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
 </style>
 </head>
 <body>
-<header><h1>UNO <span>DUO</span></h1><p>Two-player online card battle</p></header>
+<header><h1>UNO <span>DUO</span></h1><p>Two-player online card battle</p><button id="soundToggle" type="button">🔊 Sound ON</button></header>
 <main>
 <section class="panel" id="lobby">
   <p class="section-title">PLAYER NAME</p>
@@ -43,6 +128,40 @@ main{max-width:760px;margin:auto;padding:12px;display:grid;gap:12px}.panel{backg
 </main>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+let soundEnabled = true;
+let audioContext = null;
+
+function playSound(kind = 'card') {
+  if (!soundEnabled) return;
+  try {
+    const Audio = window.AudioContext || window.webkitAudioContext;
+    if (!Audio) return;
+    if (!audioContext) audioContext = new Audio();
+    if (audioContext.state === 'suspended') audioContext.resume();
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const now = audioContext.currentTime;
+    const notes = kind === 'draw' ? [330, 440] : [520, 660];
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(notes[0], now);
+    osc.frequency.setValueAtTime(notes[1], now + 0.07);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.09, now + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    osc.start(now);
+    osc.stop(now + 0.17);
+  } catch (e) {}
+}
+
+document.getElementById('soundToggle').onclick = () => {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundToggle').textContent =
+    soundEnabled ? '🔊 Sound ON' : '🔇 Sound OFF';
+  if (soundEnabled) playSound('card');
+};
+
 const socket = io();
 const $ = id => document.getElementById(id);
 let gameState = null, myCode = "";
@@ -54,7 +173,7 @@ function cardNode(card, clickable=false, index=-1){
   b.className="card "+(card.color||"wild");
   b.innerHTML="<span>"+label(card.value)+"</span>";
   if(!clickable)b.disabled=true;
-  if(clickable)b.addEventListener("click",()=>play(index,card));
+  if(clickable)b.addEventListener("click",()=>{playSound("card");play(index,card);});
   return b;
 }
 function canPlayLocal(card){
@@ -95,7 +214,7 @@ function play(index,card){
 }
 $("create").onclick=()=>socket.emit("createRoom",{name:$("name").value});
 $("join").onclick=()=>socket.emit("joinRoom",{code:$("roomCode").value,name:$("name").value});
-$("draw").onclick=()=>socket.emit("drawCard");
+$("draw").onclick=()=>{playSound("draw");socket.emit("drawCard");};
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText(myCode);showError("Room code copied!");}catch(e){showError("Room code: "+myCode);}};
 $("share").onclick=async()=>{const text="Join my UNO Duo game! Room code: "+myCode+" — "+location.href;try{if(navigator.share)await navigator.share({title:"UNO Duo",text,url:location.href});else{await navigator.clipboard.writeText(text);showError("Invite text copied!");}}catch(e){}};
 $("uno").onclick=()=>showError("UNO! You have one card left.");
