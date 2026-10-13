@@ -1,6 +1,6 @@
 name: Build UNO Duo APK
 
-on:
+"on":
   workflow_dispatch:
   push:
     branches:
